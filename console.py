@@ -19,7 +19,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, arg): 
         """List available commands"""
-        return cmd.Cmd.do_help(self, arg)
+        if arg:
+         return cmd.Cmd.do_help(self, arg)
+
+    def emptyline(self):
+        """Do nothing on empty input line."""
+        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
