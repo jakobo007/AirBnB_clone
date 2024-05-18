@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# Imported modules
 import cmd
 
 class HBNBCommand(cmd.Cmd):
