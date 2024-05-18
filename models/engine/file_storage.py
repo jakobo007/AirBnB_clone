@@ -35,8 +35,14 @@ class FileStorage:
                     except json.JSONDecodeError:
                         # Handle empty file or invalid JSON data
                         return
+                    from models.base_model import BaseModel  # Avoid circular import issues
+                    classes = {
+                        'BaseModel': BaseModel,
+                        # Add other model classes here if needed
+                    }
                     for key, value in obj_dict.items():
-                        cls_name, obj_id = key.split('.')
-                        cls = globals()[cls_name]
-                        obj = cls(**value)
-                        self.__class__.__objects[key] = obj
+                       cls_name, obj_id = key.split('.')
+                       cls = classes.get(cls_name)
+                       if cls:
+                           obj = cls(**value)
+                           self.__class__.__objects[key] = obj
