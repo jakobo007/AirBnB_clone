@@ -2,6 +2,7 @@
 # Imported modules
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter"""
 
