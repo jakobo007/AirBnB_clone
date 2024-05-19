@@ -25,5 +25,14 @@ class HBNBCommand(cmd.Cmd):
         """List available command with 'help' or detailed help with 'help cmd"""
         return cmd.Cmd.do_help(self, arg)
 
+    def do_create(self, arg):
+        """Creates a new instance of BaseModel, saves it and prints the id"""
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            new_instance = eval(arg)()
+            new_instance.save()
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
