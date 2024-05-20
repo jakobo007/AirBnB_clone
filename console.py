@@ -3,8 +3,8 @@
 import cmd
 import sys
 import os
-from models.base_model import BaseModel
 from models import storage
+
 
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter"""
@@ -33,15 +33,20 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-        try:
-            cls = globals()[arg]
-            new_instance = cls()
-            new_instance.save()
-            print(new_instance.id)
-
-        except NameError:
+        args = arg.split()
+        class_name = args[0]
+        
+        class_dict = storage.get_class_dict()
+        
+        if class_name not in class_dict:
             print("** class doesn't exist **")
+            return
 
+        cls =  class_dict[class_name]
+        new_instance = cls()
+        new_instance.save()
+        print(new_instance.id)
+        
     def do_show(self, arg):
         """Prints the strind representation of an instance"""
         """BAsed on the class name and id"""
@@ -55,9 +60,9 @@ class HBNBCommand(cmd.Cmd):
 
         class_name, instance_id = args[0], args[1]
 
-        try:
-            cls = globals()[class_name]
-        except KeyError:
+        class_dict = storage.get_class_dict()
+
+        if class_name not in class_dict:
             print("** class doesn't exist **")
             return
 
@@ -83,9 +88,9 @@ class HBNBCommand(cmd.Cmd):
 
         class_name, instance_id = args[0], args[1]
 
-        try:
-            cls = globals()[class_name]
-        except KeyError:
+        class_dict = storage.get_class_dict()
+
+        if class_name not in class_dict:
             print("** class doesn't exist **")
             return
 
@@ -99,17 +104,15 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Print all string representation of all instances"""
         """based or not based on the class name"""
+        class_dict = storage.get_class_dict()  # Access class_dict from storage
         if arg:
-            try:
-                cls = globals()[arg]
-                print([
-                       str(obj) for obj in storage.all().values() if isinstance(obj, cls)
-                       ])
-            except KeyError:
-                print("** class doessn't exist **")
-
+            if arg not in class_dict:
+                print("** class doesn't exist **")
+                return
+            instances = [str(obj) for key, obj in storage.all().items() if key.startswith(arg + ".")]
         else:
-            print([str(obj) for obj in storage.all().values()])
+            instances = [str(obj) for obj in storage.all().values()]
+        print(instances)
 
 
     def do_update(self, arg):
@@ -128,10 +131,11 @@ class HBNBCommand(cmd.Cmd):
 
         class_name, instance_id, attribute, attribute_value = args[0], args[1], args[2], args[3]
 
-        try:
-            cls = globals()[class_name]
-        except ValueError:
+        class_dict = storage.get_class_dict()
+        
+        if class_name not in class_dict:
             print("** class doesn't exist **")
+            return
 
         key = f"{class_name}.{instance_id}"
         instance = storage.all().get(key)

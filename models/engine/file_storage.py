@@ -2,11 +2,16 @@
 import json
 import os
 
+
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file to instances."""
 
     __file_path = "file.json"
     __objects = {}
+    __classes = {}
+    
+    def __init__(self):
+        self.reload()
 
     def all(self):
         """Returns the dictionary __objects."""
@@ -31,14 +36,20 @@ class FileStorage:
                     obj_dict = json.load(file)
                 except json.JSONDecodeError:
                     return
-                from models.base_model import BaseModel  # Avoid circular import issues
-                classes = {
-                    'BaseModel': BaseModel,
-                    # Add other model classes here if needed
-                }
                 for key, value in obj_dict.items():
                     cls_name  = value['__class__']
-                    cls =  classes.get(cls_name)
+                    cls = self.__classes.get(cls_name)
                     if cls:
                         obj = cls(**value)
                         self.__objects[key] = obj
+
+    def get_class_dict(self):
+        """Returns the dictionary for our classes"""
+        if not self.__classes:
+            from models.base_model import BaseModel
+            from models.user import User
+            self.__classes = {
+                'BaseModel': BaseModel,
+                'User': User
+             }
+        return self.__classes
