@@ -37,8 +37,8 @@ class FileStorage:
                     # Add other model classes here if needed
                 }
                 for key, value in obj_dict.items():
-                    cls_name, obj_id = key.split('.')
-                    cls = classes.get(cls_name)
+                    cls_name  = value['__class__']
+                    cls =  classes.get(cls_name)
                     if cls:
                         obj = cls(**value)
-                        self.__class__.__objects[key] = obj
+                        self.__objects[key] = obj
