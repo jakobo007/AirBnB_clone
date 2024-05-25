@@ -1,0 +1,34 @@
+header {
+    color: white;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+
+}
+
+.logo {
+    margin-left: 20px;
+    height: 75px;
+    width: 100px;
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+/**
+
+.logo {
+    margin-left: 20px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+}
+
+.logo::before {
+    content: url('../images/logo.png'); 
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+***/
