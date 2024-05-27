@@ -1,0 +1,44 @@
+.places {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    grid-template-areas:
+        "title title"
+        "article1 article2"
+        "article3 article3";
+}
+
+.places h1 {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: left;
+    grid-area: title;
+}
+
+.places article {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+}
+
+.places article h2 {
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+.places article:nth-child(2) {
+    grid-area: article1;
+}
+
+.places article:nth-child(3) {
+    grid-area: article2;
+}
+
+.places article:nth-child(4) {
+    grid-area: article3;
+    max-width: 390px;
+    justify-self: center;
+}
