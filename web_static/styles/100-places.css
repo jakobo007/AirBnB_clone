@@ -1,44 +1,60 @@
-.amenities2 {
-    margin-top: 40px;
-    text-align: left;
+.amen {
+   margin-top: 20px;
 }
 
-.amenities2 h2 {
-    font-size: 16px;
-    border-bottom: 1px solid #DDDDDD;
-    text-align: left;
+.amen h3{
+    margin-bottom: 10px;    
 }
 
-.amenities2 ul {
+.others {
+    border-top: 2px solid #dddddd;
+    padding-top: 10px;
+}
+
+.pet {
     list-style: none;
-    text-align: left;
-}
-
-.pets {
     background-image: url(../images/icon_pets.png);
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100px;
+    margin-bottom: 10px;
 }
 
-.net {
+.others a {
+    margin-left: 30px;
+    text-decoration: none
+}
+
+.wifi {
+    list-style: none;
     background-image: url(../images/icon_wifi.png);
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100px;
+    margin-bottom: 10px;
 }
 
 .tv {
+    list-style: none;
     background-image: url(../images/icon_tv.png);
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100px;
+    margin-bottom: 10px;
 }
 
-.amenities2 a {
-    margin-left: 20px;
-}
-
-.amenities2 ul {
+.reviews {
     margin-top: 20px;
+}
+
+.reviews h3 {
+    margin-bottom: 10px;
+}
+
+.review_1 h4 {
+    margin-top: 10px;
+}
+.review_1 {
+    border-top: 1px solid #dddddd;
+}
+
+.review_2 h4 {
+    margin-top: 10px;
 }
